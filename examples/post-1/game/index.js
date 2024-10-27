@@ -1,39 +1,3 @@
-
-let coins = [{
-    x: 300,
-    y: 925,
-    name: 'coin',
-    height: 50,
-    width: 50,
- },
- {
-    x: 200,
-    y: 925,
-    name: 'coin',
-    height: 50,
-    width: 50,
-        },
-{
-    x: 100,
-    y: 925,
-    name: 'coin',
-    height: 50,
-    width: 50,
-  },{
-    x: 400,
-    y: 925,
-    name: 'coin',
-    height: 50,
-    width: 50,
-  },{
-    x: 500,
-    y: 925,
-    name: 'coin',
-    height: 50,
-    width: 50,
-  }];
-
-
 const config = {
   type: Phaser.AUTO,
   width: 1280,
@@ -182,26 +146,18 @@ function create() {
     .setDepth(30);
 
   
- 
-   const coins = this.physics.add.group();
-
-  for (let i = 0; i < 10; i++) {
-    const x = Phaser.Math.Between(150, 1150);
-    const y = Phaser.Math.Between(150, 1150);
-    coins.create(x, y, 'coin').setDisplaySize(50, 50);
-  }
-  
-  this.physics.add.overlap(player, coins, collectCoins, null, this);
+  this.physics.add.overlap(player, null, this);
 }
 
 function update(time, delta) {
 
   let prevVelocity
   const speed = 175;
- 
-     prevVelocity = player.body.velocity.clone();
-   player.body.setVelocity(0);
-   if (cursors.left.isDown) {
+
+  prevVelocity = player.body.velocity.clone();
+  
+  player.body.setVelocity(0);
+  if (cursors.left.isDown) {
     player.body.setVelocityX(-speed);
   } else if (cursors.right.isDown) {
     player.body.setVelocityX(speed);
@@ -235,12 +191,6 @@ function update(time, delta) {
     else if (prevVelocity.y > 0) player.setTexture("atlas", "misa-front");
   }
 
-}
-
-function collectCoins(coin) {
-  score += 10
-  scoreText = 'Coins collected: ' + score
-  coin.destroy();
 }
 
 
